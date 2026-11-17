@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Job Application for Data Engineer at Acme Data</title></head><body>
+<h1>Data Engineer</h1>
+<form id="f">
+<label for="first_name">First Name*</label><input id="first_name" required>
+<label for="last_name">Last Name*</label><input id="last_name" required>
+<label for="pref">Preferred First Name</label><input id="pref">
+<label for="email">Email*</label><input id="email" required>
+<label for="phone">Phone*</label><input id="phone" type="tel" required>
+<div role="group"><div>Resume/CV*</div><input type="file" id="resume"></div>
+<label for="li">LinkedIn Profile*</label><input id="li" required>
+<label for="sal">What are your monthly salary expectations? (in USD)*</label><input id="sal" required>
+<label for="az">How many years do you have working with Azure?*</label><input id="az" required>
+<label for="song">Favorite song or album?*</label><input id="song" required>
+<label for="unk">Describe your experience with Kafka*</label><input id="unk" required>
+<label for="gender">Gender</label><input id="gender">
+<label for="emp">Are you currently an employee or contractor?*</label><select id="emp" required><option>Select...</option><option>Employee</option><option>Contractor</option><option>Neither</option></select>
+<label for="yrs">How many years of professional experience do you have in roles related to this position?*</label><select id="yrs"><option>Select...</option><option>Less than 1 year</option><option>1+ year</option><option>2+ years</option><option>3+ years</option><option>4+ years</option><option>5+ years</option></select>
+<label for="eng">Which statement best describes your English proficiency?*</label><select id="eng"><option>Select...</option><option>I do not speak English yet.</option><option>Basic phrases (Basic).</option><option>Routine tasks (Intermediate).</option><option>Fluent and spontaneous (Advanced).</option></select>
+<fieldset><legend>Are you legally authorized to work in your country of residence?*</legend>
+<label><input type="radio" name="auth" value="1"> Yes</label><label><input type="radio" name="auth" value="0"> No</label></fieldset>
+<label for="latam">Are you currently located in Latin America (LATAM)?*</label>
+<div class="select__control"><input id="latam" role="combobox" aria-required="true"><span class="val"></span></div>
+<label for="cl">Cover Letter</label><textarea id="cl"></textarea>
+<button type="submit" id="submit">Submit application</button>
+</form>
+<script>
+// combobox simulado no estilo react-select: abre opções ao receber mousedown
+const c=document.getElementById('latam'); let box;
+c.addEventListener('mousedown',()=>{ if(box) return; box=document.createElement('div'); ['Yes','No'].forEach(t=>{const o=document.createElement('div');o.setAttribute('role','option');o.textContent=t;o.onclick=()=>{c.parentElement.querySelector('.val').textContent=t;c.parentElement.querySelector('.val').className='val select__single-value';box.remove();box=null;};box.appendChild(o);}); c.parentElement.after(box); });
+window.submitted=false; document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();window.submitted=true;});
+</script></body></html>

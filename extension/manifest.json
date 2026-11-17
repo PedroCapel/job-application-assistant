@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Preenche Vagas",
+  "version": "0.1.0",
+  "description": "Preenche formulários de candidatura (Greenhouse, Lever, Ashby, Workable) com o seu perfil e para antes do envio.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://job-boards.greenhouse.io/*", "https://boards.greenhouse.io/*", "https://job-boards.eu.greenhouse.io/*",
+    "https://jobs.lever.co/*", "https://jobs.ashbyhq.com/*", "https://apply.workable.com/*"
+  ],
+  "options_page": "options.html",
+  "action": { "default_title": "Preenche Vagas", "default_popup": "popup.html" },
+  "content_scripts": [{
+    "matches": [
+      "https://job-boards.greenhouse.io/*", "https://boards.greenhouse.io/*", "https://job-boards.eu.greenhouse.io/*",
+      "https://jobs.lever.co/*", "https://jobs.ashbyhq.com/*", "https://apply.workable.com/*"
+    ],
+    "js": ["rules.js", "content.js"],
+    "run_at": "document_idle"
+  }]
+}

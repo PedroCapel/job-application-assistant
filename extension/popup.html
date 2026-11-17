@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Preenche Vagas</title>
+<style>
+  body{margin:0;padding:14px;width:260px;font:14px/1.45 system-ui,sans-serif;color:#111827;background:#fff}
+  @media (prefers-color-scheme: dark){body{background:#111a2c;color:#e5e7eb}button.sec{color:#e5e7eb;border-color:#334155}}
+  h1{font-size:15px;margin:0 0 8px} p{margin:0 0 10px;font-size:12.5px;opacity:.8}
+  button{width:100%;font:inherit;padding:9px 12px;border-radius:8px;cursor:pointer;margin-bottom:8px}
+  button.pri{background:#047857;color:#fff;border:0;font-weight:600} button.sec{background:transparent;border:1px solid #d1d5db}
+  #msg{font-size:12.5px;min-height:18px}
+</style></head>
+<body>
+  <h1>Preenche Vagas</h1>
+  <p>Preenche o formulário desta aba com o seu perfil. O envio é sempre seu.</p>
+  <button class="pri" id="fill">Preencher esta página</button>
+  <button class="sec" id="opts">Editar perfil</button>
+  <div id="msg" role="status"></div>
+  <script src="popup.js"></script>
+</body></html>

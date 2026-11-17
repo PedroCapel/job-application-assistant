@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preenche Vagas: perfil</title>
+<style>
+  :root { --bg:#f8fafc; --card:#fff; --ink:#111827; --muted:#4b5563; --line:#d1d5db; --accent:#047857; --accent-ink:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0b1220; --card:#111a2c; --ink:#e5e7eb; --muted:#9ca3af; --line:#334155; --accent:#34d399; --accent-ink:#062a1f; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 96px; }
+  h1 { font-size: 24px; margin: 0 0 4px; } h2 { font-size: 16px; margin: 0 0 12px; }
+  p.lead { color: var(--muted); margin: 0 0 20px; }
+  section { background: var(--card); border:1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+  label { display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--muted); }
+  input, select, textarea { font: inherit; color: var(--ink); background: transparent; border:1px solid var(--line); border-radius:8px; padding:8px 10px; width:100%; }
+  textarea { min-height: 150px; resize: vertical; }
+  input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .row { display:grid; grid-template-columns: 1fr 1fr auto; gap:8px; margin-bottom:8px; align-items:end; }
+  .row.tech { grid-template-columns: 1fr 110px auto; }
+  button { font: inherit; border-radius: 8px; border:1px solid var(--line); background: transparent; color: var(--ink); padding: 8px 12px; cursor:pointer; }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight:600; }
+  .bar { position: fixed; left:0; right:0; bottom:0; background: var(--card); border-top:1px solid var(--line); padding: 10px 16px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; align-items:center; }
+  .hint { font-size: 12.5px; color: var(--muted); margin: 8px 0 0; }
+  #status { color: var(--accent); font-weight:600; min-width: 80px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Seu perfil de candidaturas</h1>
+  <p class="lead">Os dados ficam só neste navegador. A extensão usa o perfil para preencher formulários e nunca clica em enviar.</p>
+
+  <section><h2>Contato</h2><div class="grid">
+    <label>Primeiro nome<input data-k="firstName" autocomplete="given-name"></label>
+    <label>Sobrenome<input data-k="lastName" autocomplete="family-name"></label>
+    <label>E-mail<input data-k="email" type="email" autocomplete="email"></label>
+    <label>Telefone (só números, com DDD)<input data-k="phone" inputmode="tel"></label>
+    <label>País do telefone (em inglês)<input data-k="phoneCountry" placeholder="Brazil"></label>
+    <label>Cidade<input data-k="city" placeholder="São Paulo"></label>
+    <label>País (em inglês)<input data-k="country" placeholder="Brazil"></label>
+    <label>LinkedIn<input data-k="linkedin" placeholder="linkedin.com/in/seu-perfil"></label>
+    <label>GitHub<input data-k="github"></label>
+    <label>Site ou portfólio<input data-k="website"></label>
+  </div></section>
+
+  <section><h2>Situação profissional</h2><div class="grid">
+    <label>Empresa atual<input data-k="currentCompany"></label>
+    <label>Vínculo atual<select data-k="employmentType"><option value="">Escolha</option><option>Employee</option><option>Contractor</option><option>Neither</option></select></label>
+    <label>Anos totais na área<input data-k="yearsTotal" inputmode="numeric"></label>
+    <label>Inglês<select data-k="english"><option value="">Escolha</option><option>Basic</option><option>Intermediate</option><option>Advanced</option><option>Fluent</option></select></label>
+    <label>Disponibilidade para começar<input data-k="availability" placeholder="Within 15 days of an offer"></label>
+    <label>Autorizado a trabalhar onde mora?<select data-k="workAuthorized"><option>Yes</option><option>No</option></select></label>
+    <label>Precisa de visto patrocinado?<select data-k="needsSponsorship"><option>No</option><option>Yes</option></select></label>
+    <label>Está na América Latina?<select data-k="inLatam"><option value="">Escolha</option><option>Yes</option><option>No</option></select></label>
+    <label>Já atendeu clientes dos EUA?<select data-k="usClients"><option value="">Escolha</option><option>Yes</option><option>No</option></select></label>
+  </div></section>
+
+  <section><h2>Pretensão salarial</h2><div class="grid">
+    <label>USD por mês<input data-k="salaryMonthlyUSD" placeholder="3200"></label>
+    <label>USD por ano<input data-k="salaryAnnualUSD" placeholder="USD 40,000 per year"></label>
+    <label>USD por hora<input data-k="salaryHourlyUSD" placeholder="20"></label>
+    <label>Moeda local por mês<input data-k="salaryLocal" placeholder="16000"></label>
+  </div></section>
+
+  <section><h2>Anos de experiência por tecnologia</h2>
+    <div id="tech"></div><button type="button" id="addTech">Adicionar tecnologia</button>
+    <p class="hint">Usado em perguntas como “How many years do you have working with Azure?”.</p>
+  </section>
+
+  <section><h2>Respostas personalizadas</h2>
+    <div id="custom"></div><button type="button" id="addCustom">Adicionar resposta</button>
+    <p class="hint">Se o rótulo da pergunta contiver o trecho, a resposta é usada. Têm prioridade sobre as regras padrão.</p>
+  </section>
+
+  <section><h2>Carta de apresentação (texto)</h2>
+    <label>Use {empresa} e {cargo}; a extensão troca pelos dados da vaga<textarea data-k="coverLetter" placeholder="Dear Hiring Team, I am writing to apply for the {cargo} position at {empresa}. ..."></textarea></label>
+  </section>
+
+  <section><h2>Currículo</h2>
+    <input type="file" id="resume" accept=".pdf,.doc,.docx">
+    <p class="hint" id="resumeInfo">Nenhum arquivo salvo.</p>
+  </section>
+</main>
+<div class="bar">
+  <button class="primary" id="save">Salvar perfil</button>
+  <button id="export">Exportar JSON</button>
+  <button id="importBtn">Importar JSON</button><input type="file" id="import" accept=".json" hidden>
+  <span id="status" role="status"></span>
+</div>
+<script src="rules.js"></script>
+<script src="options.js"></script>
+</body>
+</html>
